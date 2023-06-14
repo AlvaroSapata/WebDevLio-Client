@@ -30,11 +30,12 @@ function Login() {
      //3. redireccionamos a la pantalla privada para solo usuarios
      navigate("/");
    } catch (error) {
-    if (error.response.status === 400) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        navigate("/");
-      }
+    console.log(error)
+    // if (error.response.status === 400) {
+    //     setErrorMessage(error.response.data.message);
+    //   } else {
+    //     navigate("/");
+    //   }
    }
   }
 
@@ -53,7 +54,7 @@ function Login() {
         </div>
 
         <br />
-        <button className="myButtons" type="submit" style={{ width: "auto" }}>Log In</button>
+        <button type="submit" style={{ width: "auto" }}>Log In</button>
         <br />
         {errorMessage && <p style={{ color: "#03e9f4" }}>{errorMessage}</p>}
      </form>
