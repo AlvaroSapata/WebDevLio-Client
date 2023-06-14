@@ -19,30 +19,33 @@ function AuthWrapper(props) {
   const [isOwner, setIsOwner] = useState(false);
 
   // Gets the user id from the URL
-  const { userId} = useParams();
+  // const { userId} = useParams();
 
   useEffect(() => {
-    authenticateUser(userId);
+    authenticateUser();
   }, []);
 
   // Invokes the verify service to check if the token is valid
   const authenticateUser = async (userId) => {
     try {
       const response = await verifyService();
-      console.log("token checked");
+      // Gets email,name, last name, username and ID from the response
+      console.log("token checked", response);
 
       // From this point the user is logged in
       setIsLoggedIn(true);
 
       // Gets the user data from the payload
-      setUser(response.data.payload);
-      console.log(response.data._id)
+      setUser(response.data._id);
 
       // Stop Loading
       setIsLoading(false);
 
       // Checks if the logged user is the same as the user from URL params
-      if (response.data.payload._id === userId) {
+      //todo Pensar si esto va aqui o no
+      // console.log(response.data._id);
+      // console.log(userId);
+      if (response.data._id === userId) {
         setIsOwner(true);
       } else {
         setIsOwner(false);

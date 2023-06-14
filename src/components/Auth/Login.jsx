@@ -3,8 +3,12 @@ import { loginService } from "../../services/auth.services";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { createUserHomeProfile } from "../../services/homeProfile.services";
+import { useEffect } from "react";
+
+
+
 function Login() {
-  const { authenticateUser } = useContext(AuthContext);
+  const { authenticateUser, user, isLoggedIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -17,6 +21,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
       //token con las credenciales
       const response = await loginService({
@@ -37,7 +42,7 @@ function Login() {
       // llamar al servicio de createUserContact
 
       //3. redireccionamos a la pantalla privada para solo usuarios
-      navigate("/");
+      // navigate(`/${user}/portfolio`);
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
@@ -47,6 +52,12 @@ function Login() {
       }
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      navigate(`/${user}/portfolio`);
+    }
+  }, [isLoggedIn, user]);
 
   return (
     <div>

@@ -8,12 +8,20 @@ import Login from "./components/Auth/Login";
 // Errors
 import Error from "./pages/Errors/Error";
 import NotFound from "./pages/Errors/NotFound";
+import Portfolio from "./pages/Portfolio/Portfolio";
+
+import { AuthContext, AuthWrapper } from "./context/auth.context";
+import { useContext } from "react";
+
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <div className="App">
       <Navbar />
-      <Home />
+      
+      {isLoggedIn?<Portfolio/> : <Home /> }
       <Routes>
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Login" element={<Login />} />
