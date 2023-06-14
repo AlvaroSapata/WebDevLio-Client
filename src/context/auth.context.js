@@ -36,6 +36,7 @@ function AuthWrapper(props) {
 
       // Gets the user data from the payload
       setUser(response.data.payload);
+      console.log(response.data._id)
 
       // Stop Loading
       setIsLoading(false);

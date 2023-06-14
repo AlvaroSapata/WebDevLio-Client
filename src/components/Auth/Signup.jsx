@@ -37,17 +37,17 @@ function Signup() {
         lastName,
         username,
       };
-      await signupService(user);
-    //   navigate("/auth/login");
-    console.log(user)
+      const response = await signupService(user);
+      // navigate("/auth/login");
+      console.log(response);
     } catch (error) {
       console.log(error);
-       if (error.response.status === 400) {
-         setErrorMessage(error.response.data.message);
-       } else {
-         console.log(error);
+      if (error.response.status === 400) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        console.log(error);
         // navigate("/error")
-       }
+      }
     }
   };
   return (
@@ -116,9 +116,7 @@ function Signup() {
             onChange={handleUsernameChange}
           />
         </div>
-        <button type="submit">
-          Sign Up
-        </button>
+        <button type="submit">Sign Up</button>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </form>
     </div>
