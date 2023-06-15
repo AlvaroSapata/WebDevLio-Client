@@ -13,28 +13,20 @@ import UpdateProjectForm from "../../components/Project/EditProjectForm";
 import Contact from "../../components/Contact/Contact";
 import UpdateContact from "../../components/Contact/EditContactForm";
 
+import { AuthContext } from "../../context/auth.context";
+import { useContext } from "react";
+
 function Portfolio() {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <div>
     <h3>Welcome to your Portfolio</h3>
+
+    <h2>{user.username}</h2>
+    <h2>{user.name} {user.lastName}</h2>
     <div>
-      <h4>Home Profile</h4>
-      <HomeProfile />
-      <UpdateHomeProfile />
-
-      <h4>Skills</h4>
-      <Skills />
-      <AddSkillForm />
-      <UpdateSkillForm />
-
-      <h4>Projects</h4>
-      <Projects />
-      <AddProjectForm />
-      <UpdateProjectForm />
-
-      <h4>Contact</h4>
-      <Contact />
-      <UpdateContact />
+      <HomeProfile/>
     </div>
   </div>
   );

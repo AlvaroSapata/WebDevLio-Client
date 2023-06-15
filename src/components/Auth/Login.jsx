@@ -4,16 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { useEffect } from "react";
 
-
-
 function Login() {
-  const { authenticateUser, user, isLoggedIn } = useContext(AuthContext);
+  const { authenticateUser,   } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -32,10 +34,10 @@ function Login() {
       localStorage.setItem("authToken", response.data.authToken);
 
       // Verificamos si el usuario esta logueado
-      await authenticateUser();
 
-      //3. redireccionamos a la pantalla privada para solo usuarios
-      // navigate(`/${user}/portfolio`);
+      await authenticateUser();
+      setIsLoggedIn(true);
+      setUser(response.data.user);
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
@@ -45,12 +47,6 @@ function Login() {
       }
     }
   };
-
-  useEffect(() => {
-    if (isLoggedIn && user) {
-      navigate(`/${user._id}/portfolio`);
-    }
-  }, [isLoggedIn, user]);
 
   return (
     <div>

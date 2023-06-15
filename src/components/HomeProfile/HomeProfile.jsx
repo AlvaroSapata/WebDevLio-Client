@@ -5,19 +5,19 @@ import { useParams } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
 
 function HomeProfile() {
-  const { userId } = useParams();
-  const [homeProfile, setHomeProfile] = useState(null); // Cambiado a null en lugar de []
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoggedIn, user } = useContext(AuthContext);
+  const [isOwner, setIsOwner] = useState(false);
 
+  const [homeProfile, setHomeProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getData = async () => {
     try {
-      console.log(userId)
-      // const response = await getUserHomeProfile("648ad0f12904a8b8c1a1534c");
-      const response = await getUserHomeProfile(userId);
-      console.log("Response: ", response);
+      const response = await getUserHomeProfile(user._id);
+      console.log(response.data);
       setHomeProfile(response.data);
-      setIsLoading(false)
+
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -34,13 +34,23 @@ function HomeProfile() {
   return (
     <div>
       <h2>Home Profile</h2>
+      {isOwner ? <p>true</p> : <p>false</p>}
+
       <div>
         <h3>Title: {homeProfile.title}</h3>
         <p>Description: {homeProfile.description}</p>
-        <p>Profile Image: {homeProfile.profileImage}</p>
-        <p>Background Image: {homeProfile.backgroundImage}</p>
-        <p>Created At: {homeProfile.createdAt}</p>
-        <p>Updated At: {homeProfile.updatedAt}</p>
+        <p>
+          Profile Image:{" "}
+          <img src={homeProfile.profileImage} alt="profile" width={"100px"} />
+        </p>
+        <p>
+          Background Image:{" "}
+          <img
+            src={homeProfile.backgroundImage}
+            alt="profile"
+            width={"100px"}
+          />
+        </p>
         <h4>Links:</h4>
         <ul>
           {homeProfile.links &&
