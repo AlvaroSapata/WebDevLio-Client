@@ -12,6 +12,7 @@ import Portfolio from "./pages/Portfolio/Portfolio";
 
 import { AuthContext, AuthWrapper } from "./context/auth.context";
 import { useContext } from "react";
+import HomeProfile from "./components/HomeProfile/HomeProfile";
 
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
       <Routes>
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/:userId/portfolio" element={<Portfolio/>} />
+        <Route path="/:userId/homeProfile" element={<HomeProfile/>} />
+
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />

@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { loginService } from "../../services/auth.services";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-import { createUserHomeProfile } from "../../services/homeProfile.services";
 import { useEffect } from "react";
 
 
@@ -35,12 +34,6 @@ function Login() {
       // Verificamos si el usuario esta logueado
       await authenticateUser();
 
-      // accedemos a los demas servicios
-      // acceder al id del usuario logeado
-      // llamar al sericio de createuserHomeProfile
-      // const response2 = await createUserHomeProfile()
-      // llamar al servicio de createUserContact
-
       //3. redireccionamos a la pantalla privada para solo usuarios
       // navigate(`/${user}/portfolio`);
     } catch (error) {
@@ -55,7 +48,7 @@ function Login() {
 
   useEffect(() => {
     if (isLoggedIn && user) {
-      navigate(`/${user}/portfolio`);
+      navigate(`/${user._id}/portfolio`);
     }
   }, [isLoggedIn, user]);
 
