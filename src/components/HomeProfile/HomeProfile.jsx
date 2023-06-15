@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { getUserHomeProfile } from "../../services/homeProfile.services";
 import { useParams } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
+import { portfolioService } from "../../services/portfolio.services";
 
 function HomeProfile() {
   const { isLoggedIn, user } = useContext(AuthContext);
@@ -11,9 +12,14 @@ function HomeProfile() {
   const [homeProfile, setHomeProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // const {userId} = useParams();
+  // console.log(userId)
+
   const getData = async () => {
     try {
       const response = await getUserHomeProfile(user._id);
+      // const portfolioResponse = await portfolioService()
+      // console.log(portfolioResponse)
       console.log(response.data);
       setHomeProfile(response.data);
 

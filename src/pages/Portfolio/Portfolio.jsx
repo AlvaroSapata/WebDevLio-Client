@@ -14,11 +14,32 @@ import Contact from "../../components/Contact/Contact";
 import UpdateContact from "../../components/Contact/EditContactForm";
 
 import { AuthContext } from "../../context/auth.context";
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
+import { portfolioService } from "../../services/portfolio.services";
+import { useParams } from "react-router-dom";
 
 function Portfolio() {
+  const params = useParams();
+  console.log("params", params);
   const { user } = useContext(AuthContext);
   console.log(user);
+  
+  const getData = async () => {
+    try {
+      const response = await portfolioService(user._id);
+      // const portfolioResponse = await portfolioService()
+      // console.log(portfolioResponse)
+      console.log(response.data);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div>
     <h3>Welcome to your Portfolio</h3>

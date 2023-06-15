@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/auth.context";
 import { useEffect } from "react";
 
 function Login() {
-  const { authenticateUser,   } = useContext(AuthContext);
+  const { authenticateUser,} = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+   const [user, setUser] = useState(null);
 
 
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -37,7 +37,8 @@ function Login() {
 
       await authenticateUser();
       setIsLoggedIn(true);
-      setUser(response.data.user);
+       setUser(response.data.user);
+      navigate(`/portfolio/${user}`)
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {

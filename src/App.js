@@ -15,17 +15,19 @@ import { useContext } from "react";
 
 function App() {
   const { isLoggedIn, user } = useContext(AuthContext);
-   console.log(user)
+  console.log(user);
 
   return (
     <div className="App">
       <Navbar />
 
-      {isLoggedIn ? (<div>
-        <Navigate to={`/portfolio/${user._id}`} replace={true} />
-        <Portfolio/>
+      {isLoggedIn ? (
+        <div>
+          <Routes>
+            {/* <Navigate to={`/portfolio/${user._id}`} replace={true} /> */}
+            <Route path="/portfolio/:userId" element={<Portfolio />} />
+          </Routes>
         </div>
-        
       ) : (
         <div>
           <Routes>
