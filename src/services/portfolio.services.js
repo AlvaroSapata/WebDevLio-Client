@@ -1,8 +1,8 @@
 import service from "./config.services";
 
 // Gets all projects for a user
-const portfolioService = (userId) => {
-  return service.get(`/portfolio/${userId}`);
+const portfolioService = (userName) => {
+  return service.get(`/portfolio/${userName}`);
 };
 
 // Exports all project services

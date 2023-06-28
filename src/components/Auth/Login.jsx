@@ -38,7 +38,8 @@ function Login() {
       await authenticateUser();
       setIsLoggedIn(true);
        setUser(response.data.user);
-      navigate(`/portfolio/${user}`)
+       console.log("Response",response);
+      navigate(`/`)
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {

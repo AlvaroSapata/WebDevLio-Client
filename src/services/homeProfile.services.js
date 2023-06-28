@@ -1,8 +1,8 @@
 import service from "./config.services";
 
 // Gets the user's home profile
-const getUserHomeProfile = (userId) => {
-  return service.get(`/${userId}/homeProfile`);
+const getUserHomeProfile = () => {
+  return service.get(`/homeProfile`);
 };
 
 // Creates a new user's home profile

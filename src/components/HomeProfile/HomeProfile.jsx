@@ -17,7 +17,7 @@ function HomeProfile() {
 
   const getData = async () => {
     try {
-      const response = await getUserHomeProfile(user._id);
+      const response = await getUserHomeProfile();
       // const portfolioResponse = await portfolioService()
       // console.log(portfolioResponse)
       console.log(response.data);
@@ -62,6 +62,7 @@ function HomeProfile() {
           {homeProfile.links &&
             homeProfile.links.map((link, index) => <li key={index}>{link}</li>)}
         </ul>
+        <button>redirect</button>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import Login from "./components/Auth/Login";
 // Errors
 import Error from "./pages/Errors/Error";
 import NotFound from "./pages/Errors/NotFound";
-import Portfolio from "./pages/Portfolio/Portfolio";
+import LoggedHome from "./pages/LoggedHome/LoggedHome";
 
 import { AuthContext } from "./context/auth.context";
 import { useContext } from "react";
@@ -25,7 +25,7 @@ function App() {
         <div>
           <Routes>
             {/* <Navigate to={`/portfolio/${user._id}`} replace={true} /> */}
-            <Route path="/portfolio/:userId" element={<Portfolio />} />
+            <Route path="/" element={<LoggedHome />} />
           </Routes>
         </div>
       ) : (

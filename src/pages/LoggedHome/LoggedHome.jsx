@@ -18,34 +18,15 @@ import { useContext,useEffect } from "react";
 import { portfolioService } from "../../services/portfolio.services";
 import { useParams } from "react-router-dom";
 
-function Portfolio() {
+function LoggedHome() {
   const params = useParams();
   console.log("params", params);
   const { user } = useContext(AuthContext);
   console.log(user);
-  
-  const getData = async () => {
-    try {
-      const response = await portfolioService(user._id);
-      // const portfolioResponse = await portfolioService()
-      // console.log(portfolioResponse)
-      console.log(response.data);
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <div>
     <h3>Welcome to your Portfolio</h3>
-
-    <h2>{user.username}</h2>
-    <h2>{user.name} {user.lastName}</h2>
     <div>
       <HomeProfile/>
     </div>
@@ -53,4 +34,4 @@ function Portfolio() {
   );
 }
 
-export default Portfolio;
+export default LoggedHome;
